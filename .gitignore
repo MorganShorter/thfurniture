@@ -1,0 +1,12 @@
+*.db
+*.pyc
+
+./src/settings.py
+./src/local_settings.py
+
+apache2
+bin
+lib
+logs
+.DS_Store
+.idea

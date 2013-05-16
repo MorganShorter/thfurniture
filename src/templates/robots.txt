@@ -1,0 +1,6 @@
+# robots.txt for http://www.thailandfurnitureonline.com
+
+User-agent: *
+Disallow: /admin
+Disallow: /admin/
+

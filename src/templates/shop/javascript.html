@@ -1,0 +1,183 @@
+{% load i18n %}
+
+<script src="/static/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/nav1.1.min.js"></script>
+<script src="/static/js/jquery.easing.1.3.js"></script>
+<script src="/static/js/slimbox2.js"></script>
+
+
+<script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#navigation").navPlugin({
+            'itemWidth': 156,
+            'itemHeight': 30,
+            'navEffect': "slide",
+            'speed': 250
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#animate1').toggle(
+                function() {
+                    $(this).animate({
+                                width: '850px',
+                                height: '600px',
+                                top: '5px'
+                            },1000,
+                            'easeInOutSine');
+                },
+                function() {
+                    $(this).animate({
+                                width: '20px',
+                                height: '140px',
+                                top: '45px'
+                            },1000,
+                            'easeInOutSine');
+                }
+        ); // end toggle
+    }); // end ready
+</script>
+<script>
+    $(document).ready(function() {
+        $('#animate2').toggle(
+                function() {
+                    $(this).animate({
+                                width: '850px',
+                                height: '600px',
+                                top: '5px'
+                            },1000,
+                            'easeInOutSine');
+                },
+                function() {
+                    $(this).animate({
+                                width: '20px',
+                                height: '105px',
+                                top: '189px'
+                            },1000,
+                            'easeInOutSine');
+                }
+        ); // end toggle
+    }); // end ready
+</script>
+<script>
+    $(document).ready(function() {
+        $('#animate3').toggle(
+                function() {
+                    $(this).animate({
+                                width: '850px',
+                                height: '600px',
+                                top: '5px'
+                            },1000,
+                            'easeInOutSine');
+                },
+                function() {
+                    $(this).animate({
+                                width: '20px',
+                                height: '140px',
+                                top: '296px'
+                            },1000,
+                            'easeInOutSine');
+                }
+        ); // end toggle
+    }); // end ready
+</script>
+<script>
+    $(document).ready(function() {
+        $('#animate4').toggle(
+                function() {
+                    $(this).animate({
+                                width: '850px',
+                                height: '600px',
+                                top: '5px'
+                            },1000,
+                            'easeInOutSine');
+                },
+                function() {
+                    $(this).animate({
+                                width: '20px',
+                                height: '143px',
+                                top : '440px'
+                            },1000,
+                            'easeInOutSine');
+                }
+        ); // end toggle
+    }); // end ready
+</script>
+<script>
+    $(document).ready(function() {
+        $('#animate5').toggle(
+                function() {
+                    $(this).animate({
+                                width: '850px',
+                                height: '600px',
+                                top: '5px'
+                            },1000,
+                            'easeInOutSine');
+                },
+                function() {
+                    $(this).animate({
+                                width: '20px',
+                                height: '146px',
+                                top: '549px'
+                            },1000,
+                            'easeInOutSine');
+                }
+        ); // end toggle
+    }); // end ready
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $(window).scroll(function() {
+            if($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+
+        $('#toTop').click(function() {
+            $('body,html').animate({scrollTop:0},800);
+        });
+    });
+</script>
+
+<script>
+    jQuery(function($) {
+        $(document).ready(function() {
+            $('#myAccountHandle').hover(function() {
+                $('#myAccount').stop(true, false).animate({
+                    'right': '0px'
+                }, 900);
+
+            });
+
+            jQuery('#myAccount').hover(function() {
+                // Do nothing
+            }, function() {
+
+
+                jQuery('#myAccount').delay(2500).animate({
+                    right: '-186px'
+                }, 1000);
+
+            });
+        });
+    });
+</script>
+
+<script>
+    $("#slideshow > div:gt(0)").hide();
+
+    setInterval(function() {
+        $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+    },  3000);
+</script>
+
