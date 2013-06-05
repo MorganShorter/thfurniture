@@ -10,11 +10,17 @@ src/local_settings.py
 
 # Webserver
 apache2
+nginx.conf
+deploy/nginx.conf
+./deploy/nginx.conf
 bin/
 lib/
 logs/
 media/
 ./media/
+robots.txt
+static/robots.txt
+./static/robots.txt
 .DS_Store
 .idea
 *.py[cod]
