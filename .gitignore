@@ -1,17 +1,24 @@
 *.db
 
+# Python
 settings.py
 local_settings.py
 src/settings.py
 src/local_settings.py
+./src/settings.py
+./src/local_settings.py
 
+# Webserver
 apache2
 bin/
 lib/
 logs/
+media/
+./media/
 .DS_Store
 .idea
 *.py[cod]
+
 
 # C extensions
 *.so
@@ -41,7 +48,6 @@ nosetests.xml
 
 # Translations
 *.mo
-
 
 downloads
 eggs
