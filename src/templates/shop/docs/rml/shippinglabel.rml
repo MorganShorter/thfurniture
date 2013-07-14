@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <!DOCTYPE document SYSTEM "rml_1_0.dtd">
+<docinit>
+<registerFont fontName="Helvetica"         fontFile="DejaVuSans.ttf"/>
+<registerFont fontName="Helvetica-Bold"       fontFile="DejaVuSans-Bold.ttf"/>
+<registerFont fontName="Helvetica-BoldOblique"  fontFile="DejaVuSans-BoldOblique.ttf"/>
+<registerFont fontName="Helvetica-Oblique"       fontFile="DejaVuSans-Oblique.ttf"/>
+</docinit>
 <document filename="{{ filename }}">
 <template pageSize="(10.2cm, 15.4cm)"
           leftMargin="1cm"
