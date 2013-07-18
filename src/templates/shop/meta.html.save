@@ -1,0 +1,15 @@
+{% load i18n %}
+{% block meta %}
+<!-- START BLOCK meta -->
+{% if product.meta %}
+<meta name="description" content="{{ product.meta|escape }}"/>
+<meta name="keywords" content="{{ product.meta|escape }}"/>
+{% elseif category.meta %}
+<meta name="description" content="{{ category.meta|escape }}"/>
+<meta name="keywords" content="{{ category.meta|escape }}"/>
+{% else %}
+<meta name="description" content="Thailand Furniture Online offers interior design services and made to order furniture to your requirements."/>
+<meta property="og:description" contentt="Thailand Furniture Online offers interior design services and made to order furniture to your requirements."/>
+{% endif %}
+<!-- END BLOCK meta -->
+{% endblock meta %}

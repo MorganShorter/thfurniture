@@ -1,0 +1,16 @@
+{% load i18n %}
+{% block dochead %}
+<!-- START BLOCK dochead -->
+<head>
+    {% block extra-head %}{% endblock %}
+    {% block stylesheet %}
+            <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+            <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
+    {% endblock %}
+    <title>{% block title %}{{ shop_name }}{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
+    {% plugin_point "page_head" %}
+    {% include "shop/javascript.html" %}
+</head>
+<!-- END BLOCK dochead -->
+{% endblock dochead %}
+

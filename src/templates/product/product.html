@@ -1,0 +1,102 @@
+{% extends "shop/base.html" %}
+{% comment %}
+-------------------------------------------------------------------
+This is the base product detail page.
+To modify the templates of specific types of products, such as
+ProductVariations or CustomProducts, look for product/detail_xxx.html
+-------------------------------------------------------------------
+{% endcomment %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% load app_plugins %}
+
+{% block extra-head %}
+{% if product.meta %}
+<meta name="description" content="{{product.meta}}">
+{% endif %}
+
+<link rel="stylesheet" href="/static/css/slimbox2.css" type="text/css" media="screen" />
+
+{% endblock %}
+
+{% block navbar %}
+<li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+{% for name, url in product.category.all.0.get_url_name %}
+<li><a href="{{ url }}">{{ name }}</a></li>
+{% endfor %}
+<li>{{ product.translated_name }}</li>
+{% endblock %}
+
+{% block content %}
+{% block productdetail %}
+
+<div id="detail">
+    <h4>{{ product.translated_name }}</h4>
+    <p>{{ product.translated_description }}</p>
+
+    {% with product.translated_attributes as atts %}{% if atts %}
+    <p class="productattributes">
+        {% for att in product.translated_attributes %}
+        {{ att.description }}: {{ att.value }}<br/>
+        {% endfor %}
+    </p>
+    {% endif %}{% endwith %}
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+        {% trans "Quantity" %} <input type="text" size="5" name="quantity" id="quantity" value="1" class="priced" />
+        <input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+
+        <span id="textPrice"> {% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}: </span>{% spaceless %}
+        {% if sale %}<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>{% endif %}
+        <div style="float:right;"><div id="price">{{ product|discount_price:sale|currency }}</div><input type="submit" value="Add to cart" name="addcart" id="addcart"></div>
+        {% endspaceless %}
+        {% plugin_point "product_add_buttons" %}
+        {% plugin_point "product_form" %}
+    </form>
+
+</div>
+
+<div id="products_image">
+    {% for pic in product.productimage_set.all %}
+    {% if forloop.first %}
+    {% if pic.picture.height > pic.picture.width %}
+    {% thumbnail pic.picture "260" as big %}
+    {% thumbnail pic.picture "280x280" as image %}
+    <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+    {% endthumbnail %}<br />
+    {% endthumbnail %}
+    {% else %}
+    {% thumbnail pic.picture "660" as big %}
+    {% thumbnail pic.picture "280x280" as image %}
+    <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+    {% endthumbnail %}<br />
+    {% endthumbnail %}
+    {% endif %}
+    {% else %}
+    {% if pic.picture.height > pic.picture.width %}
+    {% thumbnail pic.picture "260" as big %}
+    {% thumbnail pic.picture "80x80" as image %}
+    <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+    {% endthumbnail %}
+    {% endthumbnail %}
+    {% else %}
+    {% thumbnail pic.picture "660" as big %}
+    {% thumbnail pic.picture "80x80" as image %}
+    <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+    {% endthumbnail %}
+    {% endthumbnail %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block productfooter %}
+{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+{% plugin_point "product_footer" %}
+{% endblock %}
+{% endblock %}

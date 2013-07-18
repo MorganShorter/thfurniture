@@ -1,0 +1,10 @@
+{% load i18n %}
+{% block meta %}
+{% if product.meta %}
+<meta name="description" content="{{ product.meta|escape }}">
+{% elseif category.meta %}
+<meta name="description" content="{{ category.meta|escape }}">
+{% else %}
+<meta name="description" content="thailand, furniture, blah blah">
+{% endif %}
+{% endblock meta %}

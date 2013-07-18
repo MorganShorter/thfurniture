@@ -1,0 +1,143 @@
+{% extends "product/product.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_util %}
+{% load satchmo_currency satchmo_category%}
+{% load satchmo_discounts satchmo_tax %}
+{% load app_plugins %}
+{% load satchmo_thumbnail %}
+
+{% block extra-head %}
+
+{% include "shop/_jquery.html" %}
+{% include "shop/_jquery_form.html" %}
+
+<link rel="stylesheet" href="/static/css/slimbox2.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/satchmo_product.js" xmlns="http://www.w3.org/1999/html"></script>
+{% blackbird_logging %}
+<script type="text/javascript">{# Javascript which is generated uniquely for each page #}
+satchmo.default_view_tax = {% if default_view_tax %}true{% else %}false{% endif %};
+
+satchmo.variations = {{ details|as_json }};
+
+satchmo.set_option_ids([{% for option_group in options %}{{ option_group.id }}{% if not forloop.last %},{% endif %}{% endfor %}]);
+
+$(function() {
+    satchmo.update_price();
+    $('.priced').change(function() { satchmo.update_price() });
+});
+
+// generate thumbnails for all alternate images
+satchmo.thumbnails = new Array();
+{{ details|js_thumbnail_array:"width=280,height=280" }}
+</script>
+{% endblock %}
+
+{% block productdetail %}
+
+
+
+<div id="detail">
+
+    <h4>{{ product.translated_name }}</h4>
+    <p>{{ product.translated_description }}</p>
+
+
+    {% with product.translated_attributes as atts %}{% if atts %}
+    <p class="productattributes">
+        {% for att in product.translated_attributes %}
+        <span id="choose"> {{ att.description }}:</span> {{ att.value }}<br/>
+        {% endfor %}
+    </p>
+    {% endif %}{% endwith %}
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+        {% if options %}
+        <p><span id="choose"> {% trans "Please choose your options" %}:</span></p>
+        {% endif %}
+
+        {% for option_group in options %}
+        <span id="choose"> {{ option_group.name }}</span>
+        <select name="{{ option_group.id }}" id="{{option_group.id}}" class="priced">
+            {% for choice in option_group.items %}
+            <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
+            {% if choice.price_change %}
+            {% option_price choice %}
+            {% endif %}
+            </option>
+            {% endfor %}
+        </select>
+        {% endfor %}
+        <span id="choose"> {% trans "Quantity" %}</span> <input type="text" size="2" name="quantity" id="quantity" value="1" class="priced" />
+        <input type="hidden" name="productname" id="productname" value="{{product.slug}}" /></br>
+
+        <span id="textPrice"> {% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}: </span>{% spaceless %}
+        {% if sale %}<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>{% endif %}
+        <div style="float:right;"><div id="price">{{ product|discount_price:sale|currency }}</div><input type="submit" value="Add to cart" name="addcart" id="addcart"></div>
+        {% endspaceless %}
+
+        <!--<input id="addcart" type="submit" name="addcart" value="{% trans "Add to cart" %}" />-->
+        {% plugin_point "product_add_buttons" %}
+        {% plugin_point "product_form" %}
+    </form>
+
+</div>
+
+
+<div id="products_image">
+<span id="product_images">
+{% for pic in product.productimage_set.all %}
+    {% if forloop.first %}
+        {% if pic.picture.height >= pic.picture.width %}
+            {% thumbnail pic.picture "400" as big %}
+                {% thumbnail pic.picture "280x280" as image %}
+                <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+                {% endthumbnail %}<br />
+            {% endthumbnail %}
+        {% else %}
+            {% thumbnail pic.picture "760" as big %}
+                {% thumbnail pic.picture "280x280" as image %}
+                <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+                {% endthumbnail %}<br />
+            {% endthumbnail %}
+        {% endif %}
+    {% else %}
+        {% if pic.picture.height >= pic.picture.width %}
+            {% thumbnail pic.picture "400" as big %}
+                {% thumbnail pic.picture "80x80" as image %}
+                <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+                {% endthumbnail %}
+            {% endthumbnail %}
+        {% else %}
+            {% thumbnail pic.picture "760" as big %}
+                {% thumbnail pic.picture "80x80" as image %}
+                <a href="{{ big.url }}" rel="lightbox-product" title="{{ product.translated_name }}"><img id="product_center"  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+                {% endthumbnail %}
+            {% endthumbnail %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+</span>
+   <!-- <a href="{{ image.url }}" rel="lightbox" title="my caption">test</a>-->
+</div>
+
+<div id="related">
+
+
+
+    {% if product.related_items.all %}
+    <p>Products related to {{ product.name }}</p>
+    {% for related_item in product.related_items.all %}
+    <p><a href="{{ related_item.get_absolute_url }}">{{ related_item.name }} -
+        {{ related_item.main_category }}</a></p>
+    {% endfor %}
+    {% else %}
+    <p>{{ product.name }} has no related products</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

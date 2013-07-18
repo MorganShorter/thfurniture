@@ -1,9 +1,11 @@
 {% load i18n %}
-{% block javascript %}
-<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
-<script src="{{ STATIC_URL }}js/nav1.1.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
-<script src="{{ STATIC_URL }}js/slimbox2.js"></script>
+
+<script src="/static/js/jquery-1.7.2.min.js"></script>
+<script src="/static/js/nav1.1.min.js"></script>
+<script src="/static/js/jquery.easing.1.3.js"></script>
+<script src="/static/js/slimbox2.js"></script>
+
+
 <script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
 <script>
     $(document).ready(function() {
@@ -178,4 +180,4 @@
                 .appendTo('#slideshow');
     },  3000);
 </script>
-{% endblock javascript %}
+
