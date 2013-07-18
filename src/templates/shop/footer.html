@@ -15,9 +15,11 @@
 {% block footer_logos %}
     <div id="footer_logos">
         <div id="footer_logo_left">
+{% if  request.META.HTTP_HOST == "www.thailandfurnitureonline.com" %}
             <div id='ajaxDivReg'>
                 <script type="text/javascript">var port=(document.location.protocol=="https:")?"":":80";var redirect=false;var secureurl=(document.location.protocol=="https:")?"www.trustmarkthai.com":"203.148.250.168";var ebansite=document.location.protocol+"//"+secureurl+port+"/eban/logo";var sites=[ebansite];function initialScriptReg(){callOtherDomain(sites,1,'0505556000935','www.trustmarkthai.com','ajaxDivReg')}function addLoadEventReg(a){var b=window.onload;if(typeof window.onload!='function'){window.onload=a}else{window.onload=function(){b();a()}}}addLoadEventReg(initialScriptReg);function AJAXInteraction(c,e,f,g,h){var i=document.getElementById(h);var j;var k=navigator.userAgent;if(k.indexOf('MSIE')>0){if('XDomainRequest'in window&&window.XDomainRequest!==null){j=new XDomainRequest();j.open("get",c+'?uid='+f+'&url='+document.domain+'&pic='+e);j.onload=function(){i.innerHTML=j.responseText};j.onerror=function(){_result=false};j.send()}}else{j=new XMLHttpRequest();j.onreadystatechange=processRequest}var d=new Date;function processRequest(){if(j.readyState==4){var a=new Date;var b=a.getTime()-d.getTime();if(b<18000&&((j.status!=0&&j.status!=502)||j.status==200)){i.innerHTML=j.responseText}else{if(document.location.protocol=="http:"&&!redirect){makeRequest("https://"+g+"/eban/logo");redirect=true}else{i.innerHTML="LOGO Doesn't exist"}}}}this.doGet=function(){j.open("GET",c+'?uid='+f+'&url='+document.domain+'&pic='+e,true);j.send()}}function makeRequest(a,b,c,d,e){var f=new AJAXInteraction(a,b,c,d,e);f.doGet()}function callOtherDomain(a,b,c,d,e){for(var i=0;i<a.length;i++){makeRequest(a[i],b,c,d,e)}}function dbd_popup_show(a){window.open(a,'dbdcer','width=530,height=640,scrollbars=no,location=no,resizable=no')}</script>
             </div>
+{% endif %}
             <a href="http://www.tfo.co.th">T.F.O. Trading Co., Ltd.</a>
         </div>
         <div id="footer_logo_right">

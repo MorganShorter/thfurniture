@@ -1,85 +1,14 @@
-{% load i18n satchmo_category satchmo_google satchmo_util satchmo_currency satchmo_discounts app_plugins normalize_decimal %}
-{% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE html
-            PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-          xml:lang="en" lang="en">
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_util %}
+{% block navbar %}
+   <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
+   <li>{% trans flatpage.title %}</li>
 {% endblock %}
-<head>
-    {% block extra-head %}{% endblock %}
-    {% block stylesheet %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
-    {% endblock %}
-    <title>{{ flatpage.title }}</title>
-    {% plugin_point "page_head" %}
-    <script src="/static/js/jquery-1.7.2.min.js"></script>
-    <script src="/static/js/nav1.1.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#navigation").navPlugin({
-                'itemWidth': 155,
-                'itemHeight': 30,
-                'navEffect': "slide",
-                'speed': 250
-            });
-        });
-
-    </script>
-    <script type="text/javascript">
-        $(function() {
-            $(window).scroll(function() {
-                if($(this).scrollTop() != 0) {
-                    $('#toTop').fadeIn();
-                } else {
-                    $('#toTop').fadeOut();
-                }
-            });
-
-            $('#toTop').click(function() {
-                $('body,html').animate({scrollTop:0},800);
-            });
-        });
-    </script>
-</head>
-{% block body %}
-    <body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
-    {% plugin_point "page_top" %}
-    <div id="container">
-        {% include "shop/top_container.html" %}
-
-       <br /><br /><br />
-
-        <div id="content">
+{% block content %}
+<br /><h3><a href="{{ flatpage.url }}">{{ flatpage.title }}</a></h3><br />
             {{ flatpage.content }}
+<br />
+{% endblock content %}
 
-            {% load flatpages %}
-            {% get_flatpages as flatpages %}
-            <!-- <ul>
-                {% for page in flatpages %}
-                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-            </ul>-->
-        </div>
-
-        <div id="toTop"></div>
-
-        {% include "shop/footer.html" %}
-
-        <div id="footer">
-            {% block footer %}
-                {% blocktrans %}<!--<a href="http://www.tfo.co.th">T.F.O. Trading Co., Ltd.</a>-->{% endblocktrans %}
-            {% endblock %}
-        </div>
-
-    </div>
-    {% block page-close %}
-        {% block google-tracker %}
-            {% if shop.options.GOOGLE.ANALYTICS.value %}
-                {% show_tracker is_secure %}
-            {% endif %}
-        {% endblock %}
-    {% endblock %}
-    </body>
-{% endblock %}
-</html>

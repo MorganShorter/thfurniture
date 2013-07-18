@@ -2,32 +2,26 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load satchmo_util %}
-
-{% block navbar %}
-   <li class="first">{% trans "&nbsp;" %}</li>
-{% endblock %}
-
+{% block navbar %}<!-- HIDE BREADCRUMBS {{ request.META.HTTP_HOST }} -->
+{% endblock navbar %}
 {% block content %}
-<!--{% trans "Welcome to Thailand Furniture Online." %}-->
-
     <div id="slideshow">
         <div>
-            <img src="{{ STATIC_URL }}/images/slide01.JPG">
+            <img src="{{ STATIC_URL }}images/slideshow/slide01.jpg">
         </div>
         <div>
-            <img src="{{ STATIC_URL }}/images/slide02.jpg">
+            <img src="{{ STATIC_URL }}images/slideshow/slide02.jpg">
         </div>
         <div>
-            <img src="{{ STATIC_URL }}/images/slide03.jpg">
+            <img src="{{ STATIC_URL }}images/slideshow/slide03.jpg">
         </div>
         <div>
-            <img src="{{ STATIC_URL }}/images/slide04.JPG">
+            <img src="{{ STATIC_URL }}images/slideshow/slide04.jpg">
         </div>
         <div>
-            <img src="{{ STATIC_URL }}/images/slide05.jpg">
+            <img src="{{ STATIC_URL }}images/slideshow/slide05.jpg">
         </div>
     </div>
-
 
 {% if all_products_list %}
     <h4>{% trans "Featured Items" %}</h4>
