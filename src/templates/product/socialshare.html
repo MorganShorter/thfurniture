@@ -1,0 +1,7 @@
+{% load i18n %}
+{% block socialshare %}
+<a id="fb_share" 
+ href="http://www.facebook.com/sharer.php?u=http%3A//{{ request.META.HTTP_HOST|escape }}{{ product.get_absolute_url|escape }}&amp;t={{ product.translated_name|escape }}-Exclusive%20to%20{{ shop_name|escape }}"
+ title="Facebook Share" onClick='showPopup(this.href);return(false);'>&nbsp;</a>
+{% endblock socialshare %}
+

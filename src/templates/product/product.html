@@ -35,6 +35,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 
 <div id="detail">
     <h4>{{ product.translated_name }}</h4>
+    {% include "product/socialshare.html" %}
     <p>{{ product.translated_description }}</p>
 
     {% with product.translated_attributes as atts %}{% if atts %}

@@ -1,0 +1,17 @@
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
+            <!--[if !IE 6]><!-->
+                <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
+            <!--<![endif]-->
+            <!--[if gte IE 7]>
+                <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
+            <![endif]-->
+            <!--[if lt IE 9]>
+                <link rel="stylesheet" href="{{ STATIC_URL }}css/IE8.below.hacks.css" />
+            <![endif]-->
+            <!--[if lte IE 6]>
+                <link rel="stylesheet" href="{{ STATIC_URL }}css/IE6.hacks.css" />
+            <![endif]-->
+<link rel="stylesheet" href="/static/css/test.css" />
+{% endblock stylesheet %}
+

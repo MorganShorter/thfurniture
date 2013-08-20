@@ -1,0 +1,39 @@
+.qtyform input[type=submit]#id_update_submit:hover {
+background: url("/static/images/buttons/icon_cart_refresh.png") no-repeat bottom;
+cursor: pointer; /* hand-shaped cursor */
+cursor: hand; /* for IE 5.x */
+}
+
+.qtyform input[type=submit]#id_update_submit {
+background: url("/static/images/buttons/icon_cart_refresh.png") no-repeat scroll center top transparent;
+border: medium none;
+font-size: 0;
+height: 16px;
+width: 16px;
+}
+
+.qtyform #id_quantity {
+width: 60px;
+}
+
+.remitmform input[type=submit]:hover {
+background: url("/static/images/buttons/icon_cart_delete.png") no-repeat bottom;
+cursor: pointer; /* hand-shaped cursor */
+cursor: hand; /* for IE 5.x */
+}
+
+.remitmform input[type=submit] {
+background: url("/static/images/buttons/icon_cart_delete.png") no-repeat scroll center top transparent;
+border: medium none;
+font-size: 0;
+height: 16px;
+width: 16px;
+}
+
+.cartTable .tdtext {
+min-width:400px;
+}
+
+.cartTable .tdnum {
+text-align: right;
+}

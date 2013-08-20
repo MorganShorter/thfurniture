@@ -1,10 +1,16 @@
 {% load i18n %}
 {% block javascript %}
-<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
-<script src="{{ STATIC_URL }}js/nav1.1.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
-<script src="{{ STATIC_URL }}js/slimbox2.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/nav1.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/slimbox2.js"></script>
 <script type="text/javascript" src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
+<script type="text/javascript">
+function showPopup(url) {
+newwindow=window.open(url,'name','height=190,width=520,top=200,left=300,resizable=1,location=0,menubar=0,status=0,titlebar=0,scrollbars=0');
+if (window.focus) {newwindow.focus()}
+}
+</script>
 <script>
     $(document).ready(function() {
         $("#navigation").navPlugin({

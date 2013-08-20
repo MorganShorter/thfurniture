@@ -25,15 +25,17 @@
     <h3>{% trans "Please validate the following information, then submit your order." %}</h3>
 {% endif %}
 {% endblock %}
-
+<div id="confirmOrderDetails">
 {% block order_details %}
     {% order_details order default_view_tax %}
 {% endblock %}
-
+</div>
+<div id="confirmPaymentDisplay">
 {% block payment_display %}
 {# override for module-specific needs, such as displaying card info #}
 {% endblock %}
-
+</div>
+<div id="confirmPaymentForm">
 {% block payment_form %}
 {# override with any payment-module specific needs #}
 <form method="post" action=".">{% csrf_token %}
@@ -41,5 +43,6 @@
 <input type="submit" value="{% trans "Purchase Items" %}"/>
 </form>
 {% endblock %}
+</div>
 
 {% endblock content %}

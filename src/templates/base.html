@@ -3,17 +3,18 @@
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://ogp.me/ns/fb#"
       xml:lang="en" lang="en">
 {% endblock %}
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     {% block extra-head %}{% endblock %}
-    {% block stylesheet %}
-            <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
-            <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css" />
-    {% endblock %}
+    {% include "shop/stylesheet.html" %}
     <title>{% block title %}{{ shop_name }}{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
     {% plugin_point "page_head" %}
+    {% include "shop/meta.html" %}
     {% include "shop/javascript.html" %}
 </head>
 {% block body %}
